@@ -29,12 +29,16 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+prisma_generate_log.txt
 
 # env files (can opt-in for committing if needed)
 .env*
 
 # vercel
 .vercel
+
+# local temp
+temp_prisma2/
 
 # typescript
 *.tsbuildinfo

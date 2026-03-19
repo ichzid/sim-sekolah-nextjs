@@ -1,0 +1,121 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  nama      String
+  role      String   @default("admin")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model InfoSekolah {
+  id             Int      @id @default(autoincrement())
+  nama           String
+  singkatan      String
+  npsn           String
+  akreditasi     String
+  tahunBerdiri   String
+  kepalaSekolah  String
+  alamat         String
+  kota           String
+  kodePos        String
+  telepon        String
+  email          String
+  website        String
+  jamOperasional String   @default("")
+  googleMapsUrl  String   @default("https://maps.google.com")
+  facebookUrl    String   @default("#")
+  instagramUrl   String   @default("#")
+  youtubeUrl     String   @default("#")
+  whatsappUrl    String   @default("#")
+  visi           String
+  misi           String   // JSON array string
+  statistikSekolah String @default("[]") // JSON array string
+  prestasiSekolah  String @default("[]") // JSON array string
+  sambutanKepalaSekolah String @default("")
+  motto          String
+  updatedAt      DateTime @updatedAt
+}
+
+model Berita {
+  id        Int      @id @default(autoincrement())
+  slug      String?  @unique
+  judul     String
+  ringkasan String
+  isi       String   @default("")
+  kategori  String
+  tanggal   String
+  tipe      String   // 'berita' | 'pengumuman'
+  prioritas Boolean  @default(false)
+  warnaBg   String?
+  warnaKiri String?
+  icon      String?
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Guru {
+  id          Int      @id @default(autoincrement())
+  nama        String
+  jabatan     String
+  mapel       String
+  pendidikan  String
+  pengalaman  String
+  kategori    String   // 'pimpinan' | 'guru' | 'staf'
+  warnaBg     String
+  aktif       Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ItemGaleri {
+  id        Int      @id @default(autoincrement())
+  judul     String
+  keterangan String
+  kategori  String   // 'akademik' | 'ekskul' | 'event'
+  icon      String
+  warnaBg   String
+  ukuran    String   @default("normal") // 'normal' | 'besar' | 'lebar'
+  aktif     Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
+
+model Dokumen {
+  id        Int      @id @default(autoincrement())
+  nama      String
+  ukuran    String
+  tanggal   String
+  tipe      String   // 'PDF' | 'DOCX' | dsb.
+  icon      String
+  warnaIcon String
+  warnaBg   String
+  keyword   String
+  url       String   @default("#")
+  aktif     Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
+
+model PendaftarPPDB {
+  id          Int      @id @default(autoincrement())
+  namaLengkap String
+  nisn        String?
+  tanggalLahir String
+  asalSekolah String?
+  namaOrtu    String
+  teleponOrtu String
+  jalur       String   // 'reguler' | 'prestasi' | 'afirmasi'
+  status      String   @default("pending") // pending | diterima | ditolak
+  catatan     String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

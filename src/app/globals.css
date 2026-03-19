@@ -1,26 +1,179 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --navy: #0f2557;
+  --navy-light: #1a3a80;
+  --gold: #c8972a;
+  --gold-light: #e6b84a;
+  --cream: #fdf8f0;
+  --text: #1e1e2e;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  scroll-behavior: smooth;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+a[href],
+button,
+[role="button"],
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+summary {
+  cursor: pointer;
+}
+
+button:disabled,
+input:disabled,
+select:disabled,
+textarea:disabled {
+  cursor: not-allowed;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text);
+  background: var(--cream);
 }
+
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+}
+
+/* Gold line */
+.gold-line {
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+/* Section badge */
+.section-badge {
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+}
+
+/* Cards */
+.card-hover {
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.card-hover:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(15, 37, 87, 0.15);
+}
+
+/* Gallery */
+.gallery-item { position: relative; overflow: hidden; }
+.gallery-item:hover .gallery-overlay { opacity: 1; }
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 37, 87, 0.75);
+  opacity: 0;
+  transition: opacity 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Timeline */
+.timeline-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 3px solid white;
+  box-shadow: 0 0 0 3px var(--gold);
+  flex-shrink: 0;
+}
+
+/* Accordion */
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+.accordion-content.open { max-height: 500px; }
+
+/* Step circle */
+.step-circle {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--navy), var(--navy-light));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+/* Stat card */
+.stat-card {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(200, 151, 42, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+/* Hero orb */
+.hero-bg {
+  background: linear-gradient(135deg, #0a1a4e 0%, #0f2557 40%, #1a3a80 70%, #0a2040 100%);
+  position: relative;
+  overflow: hidden;
+}
+.hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200, 151, 42, 0.15) 0%, transparent 70%);
+}
+
+/* Nav link underline */
+.nav-link { position: relative; }
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--gold);
+  transition: width 0.3s;
+}
+.nav-link:hover::after { width: 100%; }
+
+/* Animate on scroll */
+.aos { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.aos.visible { opacity: 1; transform: translateY(0); }
+
+/* Download row */
+.dl-row:hover { background: #f0f4ff; }
+.dl-row { transition: background 0.2s; }
+
+/* Form group */
+.form-group { position: relative; }
+.form-group input,
+.form-group textarea,
+.form-group select {
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 12px 14px;
+  width: 100%;
+  background: white;
+  outline: none;
+  transition: border-color 0.2s;
+  font-family: 'DM Sans', sans-serif;
+}
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus { border-color: var(--navy); }
+
+/* News tag */
+.news-tag {
+  background: var(--navy);
+  color: white;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+/* Tab active */
+.tab-btn.active { background: var(--navy); color: white; }

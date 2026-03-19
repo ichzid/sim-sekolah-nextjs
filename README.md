@@ -135,9 +135,6 @@ Jika proyek ini bermanfaat dan Anda ingin mendukung pengembangan selanjutnya, An
 
 https://saweria.co/ichzid
 
-CTA:
-Jika proyek ini membantu, silakan dukung pengembangannya lewat Saweria agar fitur-fitur berikutnya bisa terus dikembangkan.
-
 ---
 
 Dibuat untuk membantu sekolah mengelola website publik dan administrasi konten secara lebih rapi, modern, dan terintegrasi.

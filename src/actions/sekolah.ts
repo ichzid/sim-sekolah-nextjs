@@ -40,6 +40,7 @@ export async function updateInfoSekolah(formData: FormData) {
     statistikSekolah: JSON.stringify(statistikSekolah),
     prestasiSekolah: JSON.stringify(prestasiSekolah),
     sambutanKepalaSekolah: (formData.get('sambutanKepalaSekolah') as string) || '',
+    heroBackgroundUrl: (formData.get('heroBackgroundUrl') as string) || '',
     motto: (formData.get('motto') as string) || '',
   }
 

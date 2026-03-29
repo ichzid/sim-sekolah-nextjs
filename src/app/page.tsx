@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { prisma } from '@/lib/db'
 import { formatTanggalIndonesia } from '@/lib/format'
-import { parseJsonArray } from '@/lib/info-sekolah'
 
 export default async function HomePage() {
   const info = await prisma.infoSekolah.findFirst()
@@ -9,9 +8,10 @@ export default async function HomePage() {
     nama: 'SD Muhammadiyah Danau Sijabut',
     akreditasi: 'A',
     motto: 'Cerdas, Berakhlak, Berprestasi',
-    statistikSekolah: '[]',
+    heroBackgroundUrl: '/hero-sekolah-dummy.svg',
   }
-  const statistikSekolah = parseJsonArray<{ nilai: string; label: string }>(infoSekolah.statistikSekolah).slice(0, 4)
+  const heroImageUrl = infoSekolah.heroBackgroundUrl?.trim() || '/hero-sekolah-dummy.svg'
+  const heroBackground = `linear-gradient(135deg, rgba(10,26,78,0.8) 0%, rgba(15,37,87,0.72) 40%, rgba(26,58,128,0.6) 100%), url('${heroImageUrl}')`
 
   const dataBerita = await prisma.berita.findMany({
     where: { tipe: 'berita', published: true, slug: { not: null } },
@@ -34,13 +34,22 @@ export default async function HomePage() {
   return (
     <>
       {/* ===== HERO ===== */}
-      <section className="hero-bg min-h-screen flex items-center relative">
+      <section
+        className="hero-bg min-h-screen flex items-center relative"
+        style={
+          {
+            backgroundImage: heroBackground,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }
+        }
+      >
         <div
-          className="hero-orb w-96 h-96 opacity-60"
+          className="hero-orb w-96 h-96 opacity-30"
           style={{ top: '40px', right: '80px' }}
         />
         <div
-          className="hero-orb w-72 h-72 opacity-40"
+          className="hero-orb w-72 h-72 opacity-20"
           style={{ bottom: '80px', left: '40px' }}
         />
 
@@ -88,24 +97,6 @@ export default async function HomePage() {
                 Pelajari Lebih
               </Link>
             </div>
-          </div>
-
-          {/* Stats */}
-          <div className="grid grid-cols-2 gap-4">
-            {statistikSekolah.map((stat, i) => (
-              <div
-                key={i}
-                className="stat-card rounded-2xl p-6 text-white text-center"
-              >
-                <div
-                  className="text-4xl font-black"
-                  style={{ color: '#e6b84a' }}
-                >
-                  {stat.nilai}
-                </div>
-                <div className="text-sm text-white/70 mt-1">{stat.label}</div>
-              </div>
-            ))}
           </div>
         </div>
 

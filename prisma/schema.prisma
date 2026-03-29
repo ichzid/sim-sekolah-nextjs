@@ -42,6 +42,7 @@ model InfoSekolah {
   statistikSekolah String @default("[]") // JSON array string
   prestasiSekolah  String @default("[]") // JSON array string
   sambutanKepalaSekolah String @default("")
+  heroBackgroundUrl String @default("")
   motto          String
   updatedAt      DateTime @updatedAt
 }

@@ -8,6 +8,7 @@ export const metadata: Metadata = { title: 'Info Sekolah' }
 export default async function InfoSekolahPage() {
   await requireAdmin()
   const info = await getInfoSekolah()
+  const heroPreviewUrl = info?.heroBackgroundUrl?.trim() || '/hero-sekolah-dummy.svg'
 
   const misiArr = parseJsonArray<string>(info?.misi)
   const statistikArr = parseJsonArray<{ nilai: string; label: string }>(info?.statistikSekolah)
@@ -30,7 +31,7 @@ export default async function InfoSekolahPage() {
             <div className="grid md:grid-cols-2 gap-4">
               {[
                 { label: 'Nama Lengkap Sekolah', name: 'nama', val: info?.nama, ph: 'SD Muhammadiyah Danau Sijabut', full: true },
-                { label: 'Singkatan', name: 'singkatan', val: info?.singkatan, ph: 'SD Muhda' },
+                { label: 'Singkatan', name: 'singkatan', val: info?.singkatan, ph: 'SD MuDaSi' },
                 { label: 'NPSN', name: 'npsn', val: info?.npsn, ph: '10202012' },
                 { label: 'Akreditasi', name: 'akreditasi', val: info?.akreditasi, ph: 'A' },
                 { label: 'Tahun Berdiri', name: 'tahunBerdiri', val: info?.tahunBerdiri, ph: '1980' },
@@ -71,6 +72,50 @@ export default async function InfoSekolahPage() {
                     className="w-full px-4 py-3 border border-gray-200 rounded-xl outline-none focus:border-[#0f2557] text-sm transition-colors" />
                 </div>
               ))}
+            </div>
+          </div>
+
+          <hr className="border-gray-100" />
+
+          <div>
+            <h3 className="font-semibold text-sm text-gray-500 uppercase tracking-wider mb-4">Hero Halaman Depan</h3>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                  URL Gambar Background Hero
+                </label>
+                <input
+                  type="text"
+                  name="heroBackgroundUrl"
+                  defaultValue={info?.heroBackgroundUrl ?? ''}
+                  placeholder="https://images.unsplash.com/photo-..."
+                  className="w-full px-4 py-3 border border-gray-200 rounded-xl outline-none focus:border-[#0f2557] text-sm transition-colors"
+                />
+                <p className="text-xs text-gray-400 mt-2">
+                  Kosongkan jika ingin memakai gambar dummy bawaan. Gunakan link gambar langsung agar tampil stabil.
+                </p>
+              </div>
+              <div
+                className="rounded-2xl overflow-hidden border border-gray-100 min-h-44"
+                style={{
+                  backgroundImage: `linear-gradient(135deg, rgba(10,26,78,0.78), rgba(15,37,87,0.74), rgba(26,58,128,0.68)), url('${heroPreviewUrl}')`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                }}
+              >
+                <div className="px-6 py-8 text-white">
+                  <p className="text-xs uppercase tracking-[0.3em] text-white/65 font-semibold">Preview Hero</p>
+                  <h4
+                    className="text-3xl font-black mt-3"
+                    style={{ fontFamily: 'var(--font-playfair),serif' }}
+                  >
+                    {info?.nama || 'Nama Sekolah'}
+                  </h4>
+                  <p className="text-sm text-white/75 mt-3 max-w-md">
+                    {info?.motto || 'Cerdas, Berakhlak, Berprestasi'}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
 

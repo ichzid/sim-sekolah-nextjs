@@ -27,7 +27,7 @@ async function main() {
   await prisma.infoSekolah.create({
     data: {
       nama: 'SD Muhammadiyah Danau Sijabut',
-      singkatan: 'SD Muhda Sijabut',
+      singkatan: 'SD MudaSi',
       npsn: '10202012',
       akreditasi: 'A',
       tahunBerdiri: '1980',
@@ -67,6 +67,7 @@ async function main() {
         { icon: 'fa-music', judul: 'Juara 1 Seni Budaya Pelajar', keterangan: 'Tingkat Kecamatan - 2024' },
         { icon: 'fa-star', judul: 'Sekolah Unggulan Muhammadiyah', keterangan: 'PDM Asahan - 2023' },
       ]),
+      heroBackgroundUrl: '/hero-sekolah-dummy.svg',
       sambutanKepalaSekolah:
         'Puji syukur ke hadirat Allah SWT atas segala limpahan rahmat dan karunia-Nya, sehingga SD Muhammadiyah Danau Sijabut dapat terus berkarya dan berprestasi dalam dunia pendidikan Indonesia.\n\nSebagai kepala sekolah, saya senantiasa berkomitmen untuk memberikan yang terbaik bagi seluruh warga sekolah, yaitu siswa, guru, dan tenaga kependidikan, dalam menciptakan iklim belajar yang positif, inklusif, dan berpusat pada murid.\n\nKami percaya bahwa setiap siswa memiliki potensi yang unik dan berharga. Tugas kami adalah memfasilitasi, membimbing, dan menginspirasi mereka untuk menemukan versi terbaik dirinya, bukan hanya dalam prestasi akademik, tetapi juga dalam pembentukan karakter yang kokoh.\n\nKami juga mengundang seluruh pemangku kepentingan, mulai dari orang tua, masyarakat, hingga mitra pendidikan, untuk bersama-sama membangun ekosistem pendidikan yang kuat demi masa depan generasi yang lebih cerah.',
       motto: 'Cerdas, Berakhlak, Berprestasi',
@@ -76,8 +77,8 @@ async function main() {
   await prisma.berita.createMany({
     data: [
       {
-        slug: 'tim-olimpiade-matematika-sd-muhda-raih-juara-1-kabupaten',
-        judul: 'Tim Olimpiade Matematika SD Muhda Raih Juara 1 Kabupaten',
+        slug: 'tim-olimpiade-matematika-sd-mudasi-raih-juara-1-kabupaten',
+        judul: 'Tim Olimpiade Matematika SD MuDaSi Raih Juara 1 Kabupaten',
         ringkasan: 'Tiga siswa kelas VI membawa pulang medali emas dan mengharumkan nama sekolah pada ajang Olimpiade Matematika tingkat kabupaten.',
         isi: 'Prestasi ini diraih setelah pembinaan intensif selama dua bulan oleh tim guru matematika.',
         kategori: 'Prestasi',

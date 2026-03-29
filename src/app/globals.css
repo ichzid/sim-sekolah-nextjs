@@ -177,3 +177,9 @@ h1, h2, h3 {
 
 /* Tab active */
 .tab-btn.active { background: var(--navy); color: white; }
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto;
+  }
+}

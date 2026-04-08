@@ -7,7 +7,7 @@ import { logoutAction } from '@/actions/auth'
 
 const menuItems = [
   { href: '/admin', icon: 'fa-gauge', label: 'Dashboard', exact: true },
-  { href: '/admin/info-sekolah', icon: 'fa-school', label: 'Info Sekolah' },
+  { href: '/admin/info-sekolah', icon: 'fa-school', label: 'Informasi Sekolah' },
   { href: '/admin/berita', icon: 'fa-newspaper', label: 'Berita & Pengumuman' },
   { href: '/admin/guru', icon: 'fa-chalkboard-teacher', label: 'Guru & Staf' },
   { href: '/admin/galeri', icon: 'fa-images', label: 'Galeri' },

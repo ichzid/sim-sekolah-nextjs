@@ -2,7 +2,7 @@
 
 import { prisma } from '@/lib/db'
 import { requireAdmin } from '@/lib/auth'
-import { parsePrestasiTextarea, parseStatistikTextarea, parseTextareaLines } from '@/lib/info-sekolah'
+import { parseJsonArray, parseTextareaLines } from '@/lib/info-sekolah'
 import { revalidatePath } from 'next/cache'
 
 export async function getInfoSekolah() {
@@ -12,8 +12,12 @@ export async function getInfoSekolah() {
 export async function updateInfoSekolah(formData: FormData) {
   await requireAdmin()
   const misi = parseTextareaLines(formData.get('misi'))
-  const statistikSekolah = parseStatistikTextarea(formData.get('statistikSekolah'))
-  const prestasiSekolah = parsePrestasiTextarea(formData.get('prestasiSekolah'))
+  const statistikSekolah = parseJsonArray<{ nilai: string; label: string }>(
+    formData.get('statistikSekolah') as string
+  )
+  const prestasiSekolah = parseJsonArray<{ icon: string; judul: string; keterangan: string }>(
+    formData.get('prestasiSekolah') as string
+  )
 
   const existing = await prisma.infoSekolah.findFirst()
   const data = {

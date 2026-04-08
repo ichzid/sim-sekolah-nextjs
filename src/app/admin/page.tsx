@@ -20,7 +20,7 @@ export default async function AdminDashboard() {
   ]
 
   const menuCards = [
-    { icon: 'fa-school', label: 'Info Sekolah', desc: 'Edit profil dan data sekolah', href: '/admin/info-sekolah', color: '#0f2557' },
+    { icon: 'fa-school', label: 'Informasi Sekolah', desc: 'Edit profil dan data sekolah', href: '/admin/info-sekolah', color: '#0f2557' },
     { icon: 'fa-newspaper', label: 'Berita', desc: 'Kelola berita dan pengumuman', href: '/admin/berita', color: '#1a6b4a' },
     { icon: 'fa-chalkboard-teacher', label: 'Guru & Staf', desc: 'Kelola data tenaga pengajar', href: '/admin/guru', color: '#c8972a' },
     { icon: 'fa-images', label: 'Galeri', desc: 'Kelola foto-foto kegiatan', href: '/admin/galeri', color: '#7c3aed' },

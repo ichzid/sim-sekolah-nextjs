@@ -49,10 +49,6 @@ Kami juga mengundang seluruh pemangku kepentingan, mulai dari orang tua, masyara
   return (
     <>
       <div className="pt-24 pb-12 text-center" style={{ background: 'linear-gradient(135deg,#0f2557,#1a3a80)' }}>
-        <span className="text-xs font-bold px-4 py-1 rounded-full uppercase tracking-widest"
-          style={{ background: 'rgba(200,151,42,0.2)', color: '#e6b84a' }}>
-          Tentang Kami
-        </span>
         <h1 className="text-4xl font-black text-white mt-4" style={{ fontFamily: 'var(--font-playfair),serif' }}>
           Profil Sekolah
         </h1>

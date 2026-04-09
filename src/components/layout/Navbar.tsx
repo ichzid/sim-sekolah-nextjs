@@ -67,7 +67,11 @@ export default function Navbar({ info }: { info: { nama: string, singkatan: stri
               key={link.href}
               href={link.href}
               className={`nav-link transition-colors hover:text-yellow-300 ${
-                pathname === link.href ? 'text-yellow-300' : ''
+                link.href === '/' 
+                  ? pathname === '/' 
+                  : pathname.startsWith(link.href) 
+                    ? 'text-yellow-300' 
+                    : ''
               }`}
             >
               {link.label}
@@ -108,7 +112,13 @@ export default function Navbar({ info }: { info: { nama: string, singkatan: stri
             <Link
               key={link.href}
               href={link.href}
-              className="py-3 border-b border-white/10 hover:text-yellow-300 transition-colors"
+              className={`py-3 border-b border-white/10 hover:text-yellow-300 transition-colors ${
+                link.href === '/' 
+                  ? pathname === '/' 
+                  : pathname.startsWith(link.href) 
+                    ? 'text-yellow-300' 
+                    : ''
+              }`}
               onClick={() => setMenuOpen(false)}
             >
               {link.label}

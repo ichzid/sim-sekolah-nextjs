@@ -114,9 +114,6 @@ export default async function HomePage() {
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
             <div>
-              <span className="section-badge text-white text-xs font-bold px-4 py-1 rounded-full uppercase tracking-widest">
-                Informasi Terkini
-              </span>
               <h2
                 className="text-4xl font-black mt-4"
                 style={{
@@ -199,10 +196,10 @@ export default async function HomePage() {
             </h3>
             <Link
               href="/berita"
-              className="text-sm font-semibold"
+              className="text-sm font-semibold flex items-center gap-2 hover:gap-3 transition-all"
               style={{ color: '#0f2557' }}
             >
-              Lihat Semua
+              Lihat Semua <i className="fas fa-arrow-right text-xs" />
             </Link>
           </div>
           <div className="space-y-4">
@@ -210,7 +207,7 @@ export default async function HomePage() {
               <Link
                 key={p.id}
                 href={`/berita/${p.slug}`}
-                className="flex items-start gap-4 p-5 rounded-r-xl border-l-4"
+                className="flex items-start gap-4 p-5 rounded-r-xl border-l-4 transition-all hover:translate-x-2 hover:shadow-md"
                 style={{
                   borderColor: p.warnaKiri ?? '#0f2557',
                   background:
@@ -257,9 +254,6 @@ export default async function HomePage() {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-14">
-            <span className="section-badge text-white text-xs font-bold px-4 py-1 rounded-full uppercase tracking-widest">
-              Sumber Daya Manusia
-            </span>
             <h2
               className="text-4xl font-black mt-4 mb-3"
               style={{
@@ -319,11 +313,10 @@ export default async function HomePage() {
           <div className="text-center mt-10">
             <Link
               href="/guru-staf"
-              className="inline-flex items-center gap-2 px-8 py-3 rounded-full font-semibold text-white"
+              className="inline-flex items-center gap-2 px-8 py-3 rounded-full font-semibold text-white transition-all hover:scale-105 hover:opacity-90 shadow-sm hover:shadow-md"
               style={{ background: '#0f2557' }}
             >
-              Lihat Semua Guru & Staf{' '}
-              <i className="fas fa-arrow-right" />
+              Lihat Semua Guru & Staf <i className="fas fa-arrow-right" />
             </Link>
           </div>
         </div>
@@ -335,16 +328,6 @@ export default async function HomePage() {
         style={{ background: 'linear-gradient(135deg,#0f2557,#1a3a80)' }}
       >
         <div className="max-w-4xl mx-auto px-4 text-center">
-          <div
-            className="inline-block px-4 py-1 rounded-full text-sm font-semibold mb-4"
-            style={{
-              background: 'rgba(200,151,42,0.25)',
-              color: '#e6b84a',
-            }}
-          >
-            <i className="fas fa-fire mr-2" />
-            Pendaftaran Sedang Dibuka!
-          </div>
           <h2
             className="text-4xl font-black text-white mb-4"
             style={{ fontFamily: 'var(--font-playfair), serif' }}

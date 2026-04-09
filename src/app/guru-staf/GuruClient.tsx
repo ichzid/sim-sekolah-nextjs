@@ -28,10 +28,6 @@ export default function GuruClient({ dataGuru }: { dataGuru: any[] }) {
     <>
       <div className="pt-24 pb-12 text-center"
         style={{ background: 'linear-gradient(135deg,#0f2557,#1a3a80)' }}>
-        <span className="text-xs font-bold px-4 py-1 rounded-full uppercase tracking-widest"
-          style={{ background: 'rgba(200,151,42,0.2)', color: '#e6b84a' }}>
-          Sumber Daya Manusia
-        </span>
         <h1 className="text-4xl font-black text-white mt-4"
           style={{ fontFamily: 'var(--font-playfair),serif' }}>
           Guru & Tenaga Kependidikan
@@ -49,12 +45,10 @@ export default function GuruClient({ dataGuru }: { dataGuru: any[] }) {
               <button
                 key={f.id}
                 onClick={() => setFilter(f.id)}
-                className="cursor-pointer px-6 py-2 rounded-full border text-sm font-medium transition-all"
-                style={
-                  filter === f.id
-                    ? { background: '#0f2557', color: 'white', borderColor: '#0f2557' }
-                    : { borderColor: '#e5e7eb', color: '#374151' }
-                }
+                className={`cursor-pointer px-6 py-2 rounded-full border text-sm font-medium transition-all ${
+                  filter === f.id ? 'tab-btn active bg-[#0f2557] text-white border-[#0f2557]' : 'border-gray-200 hover:border-gray-400'
+                }`}
+                style={filter === f.id ? { background: '#0f2557', color: 'white', borderColor: '#0f2557' } : {}}
               >
                 {f.label}
               </button>

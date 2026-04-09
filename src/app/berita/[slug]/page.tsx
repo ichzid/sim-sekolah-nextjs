@@ -141,14 +141,22 @@ export default async function DetailBeritaPage({ params }: PageProps) {
                   <p className="text-sm text-gray-400">Belum ada konten lain.</p>
                 )}
                 {lainnya.map((item) => (
-                  <Link key={item.id} href={`/berita/${item.slug}`} className="block group">
-                    <p className="font-semibold text-sm group-hover:text-[#c8972a] transition-colors"
-                      style={{ color: '#0f2557' }}>
-                      {item.judul}
-                    </p>
-                    <p className="text-xs text-gray-400 mt-1">
-                      {formatTanggalIndonesia(item.tanggal)}
-                    </p>
+                  <Link key={item.id} href={`/berita/${item.slug}`}
+                    className="block group p-4 -mx-4 rounded-2xl transition-all duration-300 hover:bg-white hover:shadow-xl hover:shadow-navy/5 hover:-translate-y-1 border border-transparent hover:border-gray-100"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="flex-1">
+                        <p className="font-bold text-sm leading-snug group-hover:text-[#c8972a] transition-colors line-clamp-2"
+                          style={{ color: '#0f2557' }}>
+                          {item.judul}
+                        </p>
+                        <p className="text-xs text-gray-400 mt-2 flex items-center gap-2">
+                          <i className="far fa-calendar-alt opacity-70" />
+                          {formatTanggalIndonesia(item.tanggal)}
+                        </p>
+                      </div>
+                      <i className="fas fa-chevron-right text-[10px] text-[#c8972a] opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+                    </div>
                   </Link>
                 ))}
               </div>

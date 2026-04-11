@@ -75,6 +75,7 @@ model Guru {
   pengalaman  String
   kategori    String   // 'pimpinan' | 'guru' | 'staf'
   warnaBg     String
+  fotoUrl     String?
   aktif       Boolean  @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt              

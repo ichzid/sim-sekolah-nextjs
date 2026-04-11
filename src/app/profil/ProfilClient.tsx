@@ -15,6 +15,7 @@ export default function ProfilClient({
     jabatan: string
     pendidikan: string
     pengalaman: string
+    fotoUrl?: string | null
   }
   prestasiSekolah: {
     icon: string
@@ -131,13 +132,17 @@ Kami juga mengundang seluruh pemangku kepentingan, mulai dari orang tua, masyara
             <div className="grid lg:grid-cols-[280px_minmax(0,1fr)] gap-10 items-start">
               <div className="text-center">
                 <div
-                  className="w-52 h-52 rounded-full mx-auto border-4 flex items-center justify-center shadow-sm"
+                  className="w-52 h-52 rounded-full mx-auto border-4 flex items-center justify-center shadow-sm overflow-hidden"
                   style={{
                     background: 'linear-gradient(135deg,#1e3a78,#0f2557)',
                     borderColor: '#c8972a',
                   }}
                 >
-                  <i className="fas fa-user text-white text-7xl" />
+                  {kepalaSekolah.fotoUrl ? (
+                    <img src={kepalaSekolah.fotoUrl} alt={kepalaSekolah.nama} className="w-full h-full object-cover" />
+                  ) : (
+                    <i className="fas fa-user text-white text-7xl" />
+                  )}
                 </div>
                 <h3
                   className="text-3xl font-bold mt-6 leading-tight"

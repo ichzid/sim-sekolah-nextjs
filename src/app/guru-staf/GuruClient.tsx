@@ -61,9 +61,17 @@ export default function GuruClient({ dataGuru }: { dataGuru: any[] }) {
                 bg.match(/#[0-9a-fA-F]{6}/)?.[0] ?? '#0f2557'
               return (
                 <div key={g.id} className="card-hover bg-white rounded-2xl overflow-hidden shadow-sm">
-                  <div className="h-40 flex items-center justify-center"
+                  <div className="h-40 flex items-center justify-center relative overflow-hidden"
                     style={{ background: g.warnaBg }}>
-                    <i className={`fas ${ikonMap[g.kategori] ?? 'fa-user'} text-white text-5xl`} />
+                    {g.fotoUrl ? (
+                      <img
+                        src={g.fotoUrl}
+                        alt={g.nama}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <i className={`fas ${ikonMap[g.kategori] ?? 'fa-user'} text-white text-5xl`} />
+                    )}
                   </div>
                   <div className="p-5">
                     <span className="text-xs font-bold px-2 py-1 rounded text-white"

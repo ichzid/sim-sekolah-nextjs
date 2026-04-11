@@ -278,15 +278,23 @@ export default async function HomePage() {
                   className="h-40 flex items-center justify-center"
                   style={{ background: g.warnaBg }}
                 >
-                  <i
-                    className={`fas ${
-                      g.kategori === 'pimpinan'
-                        ? 'fa-user-tie'
-                        : g.kategori === 'guru'
-                        ? 'fa-chalkboard-teacher'
-                        : 'fa-user-cog'
-                    } text-white text-5xl`}
-                  />
+                  {g.fotoUrl ? (
+                    <img
+                      src={g.fotoUrl}
+                      alt={g.nama}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <i
+                      className={`fas ${
+                        g.kategori === 'pimpinan'
+                          ? 'fa-user-tie'
+                          : g.kategori === 'guru'
+                          ? 'fa-chalkboard-teacher'
+                          : 'fa-user-cog'
+                      } text-white text-5xl`}
+                    />
+                  )}
                 </div>
                 <div className="p-5">
                   <span

@@ -62,6 +62,12 @@ export default async function TambahGuruPage() {
               placeholder="Contoh: 8 tahun"
               className="w-full px-4 py-3 border border-gray-200 rounded-xl outline-none focus:border-[#0f2557] text-sm transition-colors" />
           </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1.5">Foto Guru (Opsional)</label>
+            <input type="file" name="foto" accept="image/png, image/jpeg, image/jpg, image/webp"
+              className="w-full px-4 py-3 border border-gray-200 rounded-xl outline-none focus:border-[#0f2557] text-sm transition-colors bg-white file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#0f2557] file:text-white hover:file:bg-[#1a3a80] cursor-pointer" />
+            <p className="text-[10px] text-gray-400 mt-1">Format: JPG, PNG, WEBP (Maks 2MB). Foto akan di-resize otomatis.</p>
+          </div>
           <div className="flex gap-3 pt-2">
             <button type="submit"
               className="flex-1 py-3 rounded-xl font-semibold text-white text-sm"

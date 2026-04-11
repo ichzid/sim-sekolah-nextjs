@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import DeleteButton from '@/components/admin/DeleteButton'
 import { hapusGuru } from '@/actions/guru'
+import { toast } from 'react-toastify'
 
 interface GuruRow {
   id: number
@@ -14,6 +15,7 @@ interface GuruRow {
   pengalaman: string
   kategori: string
   warnaBg: string
+  fotoUrl?: string | null
 }
 
 const kategoriLabel: Record<string, string> = {
@@ -155,9 +157,13 @@ export default function GuruTable({ data }: { data: GuruRow[] }) {
                     <tr key={g.id} className="border-b border-gray-50 hover:bg-gray-50/80 transition-colors">
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-3">
-                          <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
+                          <div className="w-9 h-9 rounded-lg overflow-hidden flex items-center justify-center flex-shrink-0"
                             style={{ background: g.warnaBg }}>
-                            <i className="fas fa-user text-white text-sm" />
+                            {g.fotoUrl ? (
+                              <img src={g.fotoUrl} alt={g.nama} className="w-full h-full object-cover" />
+                            ) : (
+                              <i className="fas fa-user text-white text-sm" />
+                            )}
                           </div>
                           <div className="min-w-0">
                             <p className="font-medium text-gray-800">{g.nama}</p>
@@ -180,13 +186,21 @@ export default function GuruTable({ data }: { data: GuruRow[] }) {
                             className="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-blue-50 transition-colors" title="Edit">
                             <i className="fas fa-pen text-blue-500 text-sm" />
                           </Link>
-                          <form action={hapusGuru.bind(null, g.id)}>
+                          <form action={async () => {
+                            try {
+                              await hapusGuru(g.id)
+                              toast.success('Data berhasil dihapus')
+                            } catch (e) {
+                              toast.error('Gagal menghapus data')
+                            }
+                          }}>
                             <DeleteButton
                               className="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-red-50 transition-colors"
                               title="Hapus" confirmMessage="Hapus data guru/staf ini?">
                               <i className="fas fa-trash text-red-400 text-sm" />
                             </DeleteButton>
                           </form>
+
                         </div>
                       </td>
                     </tr>

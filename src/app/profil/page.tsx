@@ -13,9 +13,7 @@ export default async function ProfilPage() {
     (await prisma.guru.findFirst({
       where: {
         aktif: true,
-        jabatan: {
-          contains: 'Kepala Sekolah',
-        },
+        jabatan: 'Kepala Sekolah',
       },
     })) ||
     (info?.kepalaSekolah
@@ -46,12 +44,14 @@ export default async function ProfilPage() {
         jabatan: kepalaSekolahGuru.jabatan,
         pendidikan: kepalaSekolahGuru.pendidikan,
         pengalaman: kepalaSekolahGuru.pengalaman,
+        fotoUrl: kepalaSekolahGuru.fotoUrl,
       }
     : {
         nama: infoSekolah.kepalaSekolah,
         jabatan: 'Kepala Sekolah',
         pendidikan: '-',
         pengalaman: '-',
+        fotoUrl: null,
       }
 
   return <ProfilClient infoSekolah={infoSekolah} kepalaSekolah={kepalaSekolah} prestasiSekolah={prestasiSekolah} />

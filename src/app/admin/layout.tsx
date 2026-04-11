@@ -6,9 +6,15 @@ export const metadata: Metadata = {
   robots: 'noindex',
 }
 
+import React, { Suspense } from 'react'
+import ActionToast from '@/components/admin/ActionToast'
+
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen flex" style={{ background: '#f1f5f9', fontFamily: 'var(--font-dm-sans), sans-serif' }}>
+      <Suspense fallback={null}>
+        <ActionToast />
+      </Suspense>
       <AdminLayoutWrapper>
         {children}
       </AdminLayoutWrapper>

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { prisma } from '@/lib/db'
+import { getInfoSekolah } from '@/lib/cache'
 import { parseJsonArray } from '@/lib/info-sekolah'
 import ProfilClient from './ProfilClient'
 
@@ -7,23 +8,26 @@ export const metadata: Metadata = {
   title: 'Profil',
 }
 
+// ISR: revalidate every 60 seconds
+export const revalidate = 60
+
 export default async function ProfilPage() {
-  const info = await prisma.infoSekolah.findFirst()
-  const kepalaSekolahGuru =
-    (await prisma.guru.findFirst({
-      where: {
-        aktif: true,
-        jabatan: 'Kepala Sekolah',
-      },
-    })) ||
-    (info?.kepalaSekolah
-      ? await prisma.guru.findFirst({
-          where: {
-            aktif: true,
-            nama: info.kepalaSekolah,
-          },
-        })
-      : null)
+  const info = await getInfoSekolah()
+
+  // Try finding by jabatan first, then by nama from info
+  const kepalaSekolahGuru = info?.kepalaSekolah
+    ? await prisma.guru.findFirst({
+        where: {
+          aktif: true,
+          OR: [
+            { jabatan: 'Kepala Sekolah' },
+            { nama: info.kepalaSekolah },
+          ],
+        },
+      })
+    : await prisma.guru.findFirst({
+        where: { aktif: true, jabatan: 'Kepala Sekolah' },
+      })
 
   const infoSekolah = info || {
     nama: 'SD Muhammadiyah Danau Sijabut',

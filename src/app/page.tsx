@@ -1,9 +1,30 @@
 import Link from 'next/link'
 import { prisma } from '@/lib/db'
+import { getInfoSekolah } from '@/lib/cache'
 import { formatTanggalIndonesia } from '@/lib/format'
 
+// ISR: revalidate every 60 seconds instead of on every request
+export const revalidate = 60
+
 export default async function HomePage() {
-  const info = await prisma.infoSekolah.findFirst()
+  const [info, dataBerita, dataPengumuman, dataGuru] = await Promise.all([
+    getInfoSekolah(),
+    prisma.berita.findMany({
+      where: { tipe: 'berita', published: true, slug: { not: null } },
+      orderBy: { createdAt: 'desc' },
+      take: 3,
+    }),
+    prisma.berita.findMany({
+      where: { tipe: 'pengumuman', published: true, slug: { not: null } },
+      orderBy: { createdAt: 'desc' },
+      take: 3,
+    }),
+    prisma.guru.findMany({
+      where: { aktif: true },
+      orderBy: { id: 'asc' },
+      take: 4,
+    }),
+  ])
   const infoSekolah = info || {
     nama: 'SD Muhammadiyah Danau Sijabut',
     akreditasi: 'A',
@@ -12,24 +33,6 @@ export default async function HomePage() {
   }
   const heroImageUrl = infoSekolah.heroBackgroundUrl?.trim() || '/hero-sekolah-dummy.svg'
   const heroBackground = `linear-gradient(135deg, rgba(10,26,78,0.8) 0%, rgba(15,37,87,0.72) 40%, rgba(26,58,128,0.6) 100%), url('${heroImageUrl}')`
-
-  const dataBerita = await prisma.berita.findMany({
-    where: { tipe: 'berita', published: true, slug: { not: null } },
-    orderBy: { createdAt: 'desc' },
-    take: 3
-  })
-
-  const dataPengumuman = await prisma.berita.findMany({
-    where: { tipe: 'pengumuman', published: true, slug: { not: null } },
-    orderBy: { createdAt: 'desc' },
-    take: 3
-  })
-
-  const dataGuru = await prisma.guru.findMany({
-    where: { aktif: true },
-    orderBy: { id: 'asc' },
-    take: 4
-  })
 
   return (
     <>

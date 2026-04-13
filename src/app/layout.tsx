@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Playfair_Display, DM_Sans } from 'next/font/google'
 import './globals.css'
-import { prisma } from '@/lib/db'
+import { getInfoSekolah } from '@/lib/cache'
 import ClientLayoutWrapper from '@/components/layout/ClientLayoutWrapper'
 
 const playfair = Playfair_Display({
@@ -17,7 +17,7 @@ const dmSans = DM_Sans({
 })
 
 export async function generateMetadata(): Promise<Metadata> {
-  const info = await prisma.infoSekolah.findFirst()
+  const info = await getInfoSekolah()
   const nama = info?.nama || 'SD Muhammadiyah Danau Sijabut'
   const motto = info?.motto || 'Cerdas, Berakhlak, Berprestasi'
   const akreditasi = info?.akreditasi || 'A'
@@ -44,7 +44,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const info = await prisma.infoSekolah.findFirst()
+  const info = await getInfoSekolah()
   const infoData = {
     nama: info?.nama || 'SD Muhammadiyah',
     singkatan: info?.singkatan || 'Danau Sijabut',

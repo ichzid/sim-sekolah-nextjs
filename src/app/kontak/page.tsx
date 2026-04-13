@@ -1,8 +1,11 @@
-import { prisma } from '@/lib/db'
+import { getInfoSekolah } from '@/lib/cache'
 import KontakClient from './KontakClient'
 
+// ISR: revalidate every 60 seconds
+export const revalidate = 60
+
 export default async function KontakPage() {
-  const info = await prisma.infoSekolah.findFirst()
+  const info = await getInfoSekolah()
   const infoSekolah = {
     nama: info?.nama || 'SD Muhammadiyah Danau Sijabut',
     alamat: info?.alamat || 'Jl. Pendidikan No. 1',

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import { cache } from 'react'
 import { prisma } from '@/lib/db'
 import { formatTanggalIndonesia } from '@/lib/format'
 
@@ -8,17 +9,17 @@ type PageProps = {
   params: Promise<{ slug: string }>
 }
 
+// Deduplicate the berita query across generateMetadata and page render
+const getBeritaBySlug = cache(async (slug: string) => {
+  return prisma.berita.findUnique({ where: { slug } })
+})
+
+// ISR: revalidate every 60 seconds
+export const revalidate = 60
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params
-
-  const berita = await prisma.berita.findUnique({
-    where: { slug },
-    select: {
-      judul: true,
-      ringkasan: true,
-      published: true,
-    },
-  })
+  const berita = await getBeritaBySlug(slug)
 
   if (!berita || !berita.published) {
     return { title: 'Detail Berita' }
@@ -32,10 +33,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function DetailBeritaPage({ params }: PageProps) {
   const { slug } = await params
-
-  const berita = await prisma.berita.findUnique({
-    where: { slug },
-  })
+  const berita = await getBeritaBySlug(slug)
 
   if (!berita || !berita.published) notFound()
 
